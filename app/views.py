@@ -4,4 +4,6 @@ from app import app, models
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html')
+
+    posts = models.Post.query.all()
+    return render_template('index.html',posts=posts)

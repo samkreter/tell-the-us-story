@@ -115,13 +115,24 @@
                 </div>
         </div>
 
+        {%for post in posts%}
+        <div class="row">
+            <div class="col-md-10"></div>
+                <div class="card card-block">
+                      <h4 class="card-title"><b>{{post.title}}</b></h4>
+                      <p class="card-text">{{post.body}}</p>
+                </div>
+        </div>
+        {%endfor%}
+
+
         <div class="row">
             <div class="col-md-10"></div>
                 <div class="card card-block">
                       <h4 class="card-title"><b>Why This is here</b></h4>
                       <p class="card-text">The story of this country is not about racism intolorance or fear of other cultures, its about so many amazing people with incredible stories coming together to form a country so diverse that greatness is the only option. We are now here to share the real United States story, the US story.</p>
                 </div>
-            </div>
+        </div>
 
 
     </div>
