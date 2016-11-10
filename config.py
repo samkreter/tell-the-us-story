@@ -2,30 +2,31 @@ import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
-# class Config(object):
-DEBUG = False
-TESTING = False
-CSRF_ENABLED = True
-SECRET_KEY = 'this-really-needs-to-be-changed'
-SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
-SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
+class Config(object):
+    DEBUG = False
+    TESTING = False
+    CSRF_ENABLED = True
+    SECRET_KEY = 'this-really-needs-to-be-changed'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
+    SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
-# class ProductionConfig(Config):
-#     DEBUG = False
+class ProductionConfig(Config):
+    DEBUG = False
 
 
-# class StagingConfig(Config):
-#     DEVELOPMENT = True
-#     DEBUG = True
+class StagingConfig(Config):
+    DEVELOPMENT = True
+    DEBUG = True
 
 
-# class DevelopmentConfig(Config):
-#     DEVELOPMENT = True
-#     DEBUG = True
+class DevelopmentConfig(Config):
+    DEVELOPMENT = True
+    DEBUG = True
 
 
-# class TestingConfig(Config):
-#     TESTING = True
+class TestingConfig(Config):
+    TESTING = True
 
 
