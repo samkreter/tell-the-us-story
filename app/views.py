@@ -5,7 +5,7 @@ from app import app, models, db
 @app.route('/index')
 def index():
 
-    posts = models.Post.query.order_by(models.Post.id.desc())
+    posts = models.Post.query.order_by(models.Post.id.desc()).limit(20)
     return render_template('index.html',posts=posts)
 
 @app.route('/posts',methods=['GET'])
