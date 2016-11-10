@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, escape
 from app import app, models, db
 
 import sendgrid
@@ -40,7 +40,7 @@ def posts():
     return jsonify(
         {
             'error':1,
-            'title':title,
-            'body':body
+            'title':escape(title),
+            'body':escape(body)
 
         })
