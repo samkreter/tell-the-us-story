@@ -6,10 +6,8 @@ class Config(object):
     DEBUG = False
     TESTING = False
     CSRF_ENABLED = True
-    SECRET_KEY = 'this-really-needs-to-be-changed'
+    SECRET_KEY = 'changed-to-something-better'
     SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
-    # 'sqlite:///' + os.path.join(basedir, 'app.db')
-    SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
