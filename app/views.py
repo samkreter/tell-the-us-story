@@ -1,6 +1,15 @@
 from flask import Flask, render_template, request, jsonify
 from app import app, models, db
 
+import sendgrid
+from sendgrid.helpers.mail import *
+import os
+
+sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
+
+
+
+
 @app.route('/')
 @app.route('/index')
 def index():
@@ -15,6 +24,19 @@ def posts():
     p = models.Post(body=body, title=title)
     db.session.add(p)
     db.session.commit()
+
+
+    from_email = Email("theUsStory@samkreter.com")
+    subject = "New Post: " + title
+    to_email = Email("samkreter@gmail.com")
+    content = Content("text/plain", body)
+    mail = Mail(from_email, subject, to_email, content)
+    response = sg.client.mail.send.post(request_body=mail.get())
+    print(response.status_code)
+    print(response.body)
+    print(response.headers)
+
+
     return jsonify(
         {
             'error':1,
