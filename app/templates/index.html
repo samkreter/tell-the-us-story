@@ -104,15 +104,17 @@
 
 
     <!--Content-->
-    <div class="container">
-        <div class="row">
+    <div class="container" id="postHolder">
+        <div class="row" id="yourStoryRow">
             <div class="col-md-10"></div>
-                <div style="margin-top: 20px;" class="card card-block">
-                      <h4 class="card-title"><b>What's Your Story?</b></h4>
-                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Title">
-                      <textarea class="form-control" type="text" rows="4"></textarea>
-                      <button type="button" class="btn btn-deep-orange">Post</button>
-                </div>
+                <form id="yourStory">
+                    <div style="margin-top: 20px;" class="card card-block">
+                          <h4 class="card-title"><b>What's Your Story?</b></h4>
+                          <input name="title" type="email" class="form-control" id="exampleInputEmail1" placeholder="Title">
+                          <textarea name="body"class="form-control" type="text" rows="4"></textarea>
+                          <button type="button" id="yourStoryButton" class="btn btn-deep-orange">Post</button>
+                    </div>
+                <form>
         </div>
 
         {%for post in posts%}
@@ -161,6 +163,8 @@
 
     <!-- SCRIPTS -->
 
+
+
     <!-- JQuery -->
     <script type="text/javascript" src="static/js/jquery-2.2.3.min.js"></script>
 
@@ -172,6 +176,28 @@
 
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="static/js/mdb.min.js"></script>
+
+    <script type="text/javascript">
+
+    $("#yourStoryButton").click(function(e){
+        $.get( '/posts', $('#yourStory').serialize(), function(data) {
+            if(data['title']){
+                $("#yourStoryRow").remove();
+                $("#postHolder").prepend('  <div style="margin-top: 20px;" class="row">' +
+                                    '<div class="col-md-10"></div>' +
+                                        '<div class="card card-block">' +
+                                        '<h4 class="card-title"><b>' + data.title + '</b></h4>' +
+                                        '<p class="card-text">' + data.body + '</p>' +
+                                    '</div>' +
+                                '</div>')
+            }
+
+
+            console.log(data);
+        });
+    });
+
+    </script>
 
 
 </body>
