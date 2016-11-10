@@ -5,12 +5,12 @@ from app import app, models, db
 @app.route('/index')
 def index():
 
-    posts = models.Post.query.all()
+    posts = models.Post.query.order_by(models.Post.id.desc())
     return render_template('index.html',posts=posts)
 
 @app.route('/posts',methods=['GET'])
 def posts():
-    title = request.args.get('title')
+    title = request.args.get('title') or ""
     body = request.args.get('body')
     p = models.Post(body=body, title=title)
     db.session.add(p)
