@@ -82,7 +82,7 @@
                         <li >
                             <h1 class="h1-responsive shadow-bold">Tell The US Story <br> Tell Your Story</h1></li>
                         <li>
-                            <p class="shadow-bold" style="font-size: 23px">Tell the Latino/a, black, Asian, White, LGBT, Female, Male story</p>
+                            <p class="shadow-bold" style="font-size: 23px">Tell the Latino/a, black, Asian, White, LGBT, Female, Male, Refugee story</p>
                         </li>
 
 <!--                         <li>
@@ -110,9 +110,9 @@
                 <form id="yourStory">
                     <div style="margin-top: 20px;" class="card card-block">
                           <h4 class="card-title"><b>What's Your Story?</b></h4>
-                          <input name="title" type="email" class="form-control" id="exampleInputEmail1" placeholder="Title">
-                          <textarea name="body"class="form-control" type="text" rows="4"></textarea>
-                          <button type="button" id="yourStoryButton" class="btn btn-deep-orange">Post</button>
+                          <input name="title" type="text" class="form-control" id="exampleInputEmail1" placeholder="Title">
+                          <textarea required name="body"class="form-control" type="text" rows="4"></textarea>
+                          <button type="submit" id="yourStoryButton" class="btn btn-deep-orange">Post</button>
                     </div>
                 <form>
         </div>
@@ -131,8 +131,8 @@
         <div class="row">
             <div class="col-md-10"></div>
                 <div class="card card-block">
-                      <h4 class="card-title"><b>Why This is here</b></h4>
-                      <p class="card-text">The story of this country is not about racism intolorance or fear of other cultures, its about so many amazing people with incredible stories coming together to form a country so diverse that greatness is the only option. We are now here to share the real United States story, the US story.</p>
+                      <h4 class="card-title"><b>The Purpose</b></h4>
+                      <p class="card-text">The story of this country is not about racism intolorance or fear of other cultures. It's about so many amazing people with incredible stories coming together to form a country so diverse that greatness is the only option. This are now here to share the real United States story, the US story.</p>
                 </div>
         </div>
 
@@ -179,9 +179,10 @@
 
     <script type="text/javascript">
 
-    $("#yourStoryButton").click(function(e){
+    $("#yourStory").submit(function(e){
+        e.preventDefault();
         $.get( '/posts', $('#yourStory').serialize(), function(data) {
-            if(data['title']){
+            if(data['body']){
                 $("#yourStoryRow").remove();
                 $("#postHolder").prepend('  <div style="margin-top: 20px;" class="row">' +
                                     '<div class="col-md-10"></div>' +
@@ -191,9 +192,11 @@
                                     '</div>' +
                                 '</div>')
             }
+            else{
+                console.log(data);
+                console.log("error has occured");
+            }
 
-
-            console.log(data);
         });
     });
 
