@@ -111,7 +111,7 @@
                     <div style="margin-top: 20px;" class="card card-block">
                           <h4 class="card-title"><b>What's Your Story?</b></h4>
                           <input name="title" type="text" class="form-control" id="exampleInputEmail1" placeholder="Title (Optional)">
-                          <textarea maxlength="1500" required name="body" class="form-control" type="text" rows="4"></textarea>
+                          <textarea maxlength="30000" required name="body" class="form-control" type="text" rows="4"></textarea>
                           <button type="submit" id="yourStoryButton" class="btn btn-deep-orange">Post</button>
                     </div>
                 <form>
@@ -192,7 +192,7 @@
 
     $("#yourStory").submit(function(e){
         e.preventDefault();
-        $.get( '/posts', $('#yourStory').serialize(), function(data) {
+        $.post( '/posts', $('#yourStory').serialize(), function(data) {
             if(data['body']){
                 $("#yourStoryRow").remove();
                 $("#postHolder").prepend('  <div style="margin-top: 20px;" class="row">' +

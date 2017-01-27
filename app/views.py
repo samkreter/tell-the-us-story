@@ -17,12 +17,12 @@ def index():
     posts = models.Post.query.order_by(models.Post.id.desc()).limit(20)
     return render_template('index.html',posts=posts)
 
-@app.route('/posts',methods=['GET'])
+@app.route('/posts',methods=['POST'])
 def posts():
 
     try:
-        title = request.args.get('title') or ""
-        body = request.args.get('body')
+        title = request.form.get('title') or ""
+        body = request.form.get('body')
         p = models.Post(body=body, title=title)
         db.session.add(p)
         db.session.commit()
@@ -34,7 +34,7 @@ def posts():
         from_email = Email("theUsStory@samkreter.com")
         subject = "New Post: " + title
         to_email = Email("samkreter@gmail.com")
-        content = Content("text/plain", body[:25])
+        content = Content("text/plain", body)
         mail = Mail(from_email, subject, to_email, content)
         response = sg.client.mail.send.post(request_body=mail.get())
         print("response: ",response.status_code)
