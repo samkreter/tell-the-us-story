@@ -20,22 +20,28 @@ def index():
 @app.route('/posts',methods=['GET'])
 def posts():
     print("############################test")
-    title = request.args.get('title') or ""
-    body = request.args.get('body')
-    p = models.Post(body=body, title=title)
-    db.session.add(p)
-    db.session.commit()
+    try:
+        title = request.args.get('title') or ""
+        body = request.args.get('body')
+        p = models.Post(body=body, title=title)
+        db.session.add(p)
+        db.session.commit()
+    except:
+        print("############Error with database")
 
 
-    from_email = Email("theUsStory@samkreter.com")
-    subject = "New Post: " + title
-    to_email = Email("samkreter@gmail.com")
-    content = Content("text/plain", body[:25])
-    mail = Mail(from_email, subject, to_email, content)
-    response = sg.client.mail.send.post(request_body=mail.get())
-    print("response: ",response.status_code)
-    print("body: ", response.body)
-    print("headers: ",response.headers)
+    try:
+        from_email = Email("theUsStory@samkreter.com")
+        subject = "New Post: " + title
+        to_email = Email("samkreter@gmail.com")
+        content = Content("text/plain", body[:25])
+        mail = Mail(from_email, subject, to_email, content)
+        response = sg.client.mail.send.post(request_body=mail.get())
+        print("response: ",response.status_code)
+        print("body: ", response.body)
+        print("headers: ",response.headers)
+    except:
+        print("###################### Failed to send email")
 
 
     return jsonify(
