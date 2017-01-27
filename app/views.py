@@ -19,7 +19,7 @@ def index():
 
 @app.route('/posts',methods=['GET'])
 def posts():
-    print("############################test")
+
     try:
         title = request.args.get('title') or ""
         body = request.args.get('body')
