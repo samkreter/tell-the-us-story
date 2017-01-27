@@ -19,6 +19,7 @@ def index():
 
 @app.route('/posts',methods=['GET'])
 def posts():
+    print("############################test")
     title = request.args.get('title') or ""
     body = request.args.get('body')
     p = models.Post(body=body, title=title)
