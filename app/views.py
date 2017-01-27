@@ -30,12 +30,12 @@ def posts():
     from_email = Email("theUsStory@samkreter.com")
     subject = "New Post: " + title
     to_email = Email("samkreter@gmail.com")
-    content = Content("text/plain", body)
+    content = Content("text/plain", body[:25])
     mail = Mail(from_email, subject, to_email, content)
     response = sg.client.mail.send.post(request_body=mail.get())
-    print(response.status_code)
-    print(response.body)
-    print(response.headers)
+    print("response: ",response.status_code)
+    print("body: ", response.body)
+    print("headers: ",response.headers)
 
 
     return jsonify(
